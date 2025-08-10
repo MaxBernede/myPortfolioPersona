@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import { Card } from "@/components/ui/card"
 import TypewriterText from "@/components/typewriter-text"
 import ProfileSection from "@/components/profile-section"
@@ -24,42 +24,63 @@ export default function Persona3MenuPortfolio() {
   const [showGeometricWipe, setShowGeometricWipe] = useState(false)
 
   const selectedOption = mainMenuOptions[selectedIndex]
+  
+  
+  const handleBack = useCallback(() => {
+  if (isTransitioning) return
 
-  const handleSelect = () => {
-    if (isTransitioning || !selectedOption.available) return
+  setTransitionType("wipe")
+  setShowGeometricWipe(true)
+  setIsTransitioning(true)
 
-    const type = Math.random() > 0.5 ? "circular" : "wipe"
-    setTransitionType(type)
-    setIsTransitioning(true)
+  // AJOUT: Mettre à jour l'historique
+  window.history.pushState({ menu: "main" }, '', '#main')
 
-    if (type === "wipe") {
-      setShowGeometricWipe(true)
-      setTimeout(() => {
-        setCurrentMenu(selectedOption.id)
-        setShowGeometricWipe(false)
-        setIsTransitioning(false)
-      }, 600)
+  setTimeout(() => {
+    setCurrentMenu("main")
+    setShowGeometricWipe(false)
+    setIsTransitioning(false)
+  }, 600)
+  }, [isTransitioning])
+
+  useEffect(() => {
+    // Gestion du bouton retour du navigateur
+    const handlePopState = (event: PopStateEvent) => {
+      if (currentMenu !== "main") {
+        event.preventDefault()
+        handleBack()
+      }
     }
-  }
 
-  const handleBack = () => {
-    if (isTransitioning) return
+    window.addEventListener('popstate', handlePopState)
+    return () => window.removeEventListener('popstate', handlePopState)
+  }, [currentMenu, handleBack]) // Ajoutez handleBack ici
 
-    setTransitionType("wipe")
+  const handleSelect = useCallback(() => {
+  if (isTransitioning || !selectedOption.available) return
+
+  const type = Math.random() > 0.5 ? "circular" : "wipe"
+  setTransitionType(type)
+  setIsTransitioning(true)
+
+  // AJOUT: Ajouter à l'historique du navigateur
+  window.history.pushState({ menu: selectedOption.id }, '', `#${selectedOption.id}`)
+
+  if (type === "wipe") {
     setShowGeometricWipe(true)
-    setIsTransitioning(true)
-
     setTimeout(() => {
-      setCurrentMenu("main")
+      setCurrentMenu(selectedOption.id)
       setShowGeometricWipe(false)
       setIsTransitioning(false)
     }, 600)
   }
+  }, [isTransitioning, selectedOption])
 
-  const handleCircularTransitionComplete = () => {
+
+  const handleCircularTransitionComplete = useCallback(() => {
     setCurrentMenu(selectedOption.id)
     setIsTransitioning(false)
-  }
+  }, [selectedOption.id])
 
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
