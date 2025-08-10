@@ -450,7 +450,7 @@ export default function Persona3MenuPortfolio() {
 
                 {/* Status with Animated Border */}
                 <div className="space-y-4">
-                  <div className="flex items-center justify-between p-4 rounded-lg border border-cyan-500/20 bg-slate-800/30 backdrop-blur-sm">
+                  {/* <div className="flex items-center justify-between p-4 rounded-lg border border-cyan-500/20 bg-slate-800/30 backdrop-blur-sm">
                     <span className="text-gray-400">Status:</span>
                     <Badge
                       variant={selectedOption.available ? "default" : "secondary"}
@@ -462,7 +462,7 @@ export default function Persona3MenuPortfolio() {
                     >
                       {selectedOption.available ? "Available" : "Locked"}
                     </Badge>
-                  </div>
+                  </div> */}
 
                   {showDetails && selectedOption.available && (
                     <div className="text-cyan-300 animate-pulse p-4 rounded-lg bg-gradient-to-r from-cyan-500/10 to-blue-500/10 border border-cyan-500/20">

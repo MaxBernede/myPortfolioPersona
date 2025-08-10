@@ -42,6 +42,7 @@ export default function ProfileSection({ handleBack, isTransitioning }: ProfileS
                 layout="fill" 
                 objectFit="cover" 
                 className="w-full h-full" 
+                unoptimized
                 />
             </div>
             <h2 className="text-2xl font-bold mb-2 text-cyan-300">Maximilien Bernede</h2>
@@ -61,44 +62,62 @@ export default function ProfileSection({ handleBack, isTransitioning }: ProfileS
 
         {/* À propos */}
         <div className="lg:col-span-2 space-y-6">
-          <Card className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border-cyan-500/30 backdrop-blur-sm p-6">
+        <Card className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border-cyan-500/30 backdrop-blur-sm p-6">
             <CardContent>
-              <h3 className="text-xl font-bold mb-4 text-cyan-300">About</h3>
-              <p className="text-gray-300 leading-relaxed mb-4">
-                I am driven by the possibility to improve existing systems. I love to automate things and process, or to develop Bots that works for me.
-                I am quite new to IT but my curiosity is insatiable. Lately I discovered about homelabbing, which became a new passion for me
-              </p>
-              <p className="text-gray-300 leading-relaxed">
-                I was a student at 42 School, and that was a real chance for me.
-                This school pushes us to go far beyond the surface, to dig deep for solutions to our problems.
-                It teaches us to think differently, to explore every path, and to never stop until we truly understand what we are doing.
-              </p>
+            <h3 className="text-xl font-bold mb-4 text-cyan-300">About</h3>
+            <p className="text-gray-300 leading-relaxed mb-4">
+                I am driven by the possibility to improve existing systems. I love to automate things and process, or to develop
+                Bots that works for me. I am quite new to IT but my curiosity is insatiable. Lately I discovered about
+                homelabbing, which became a new passion for me
+            </p>
+            <p className="text-gray-300 leading-relaxed">
+                I was a student at 42 School, and that was a real chance for me. This school pushes us to go far beyond the
+                surface, to dig deep for solutions to our problems. It teaches us to think differently, to explore every path,
+                and to never stop until we truly understand what we are doing.
+            </p>
             </CardContent>
-          </Card>
-
-          <Card className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border-cyan-500/30 backdrop-blur-sm p-6">
+        </Card>
+        <Card className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border-cyan-500/30 backdrop-blur-sm p-6">
             <CardContent>
             <h3 className="text-xl font-bold mb-4 text-cyan-300">Interests</h3>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                 <h4 className="font-semibold mb-2 text-cyan-200">Technology</h4>
-                <div className="space-y-1 text-base text-gray-300">
-                    <div>• Automations and Botting</div>
-                    <div>• Webscraping</div>
-                    <div>• Homelabbing / self-hosting</div>
+                <div className="space-y-1 text-sm sm:text-base text-gray-300">
+                    <div className="flex items-start">
+                    <span className="text-cyan-400 mr-2 mt-0.5 flex-shrink-0">•</span>
+                    <span>Automations and Botting</span>
+                    </div>
+                    <div className="flex items-start">
+                    <span className="text-cyan-400 mr-2 mt-0.5 flex-shrink-0">•</span>
+                    <span>Webscraping</span>
+                    </div>
+                    <div className="flex items-start">
+                    <span className="text-cyan-400 mr-2 mt-0.5 flex-shrink-0">•</span>
+                    <span>Homelabbing / self-hosting</span>
+                    </div>
                 </div>
                 </div>
                 <div>
                 <h4 className="font-semibold mb-2 text-cyan-200">Personal</h4>
-                <div className="space-y-1 text-base text-gray-300">
-                    <div>• Sports / Muay Thai</div>
-                    <div>• Video Games</div>
-                    <div>• Traveling</div>
+                <div className="space-y-1 text-sm sm:text-base text-gray-300">
+                    <div className="flex items-start">
+                    <span className="text-cyan-400 mr-2 mt-0.5 flex-shrink-0">•</span>
+                    <span>Sports / Muay Thai</span>
+                    </div>
+                    <div className="flex items-start">
+                    <span className="text-cyan-400 mr-2 mt-0.5 flex-shrink-0">•</span>
+                    <span>Video Games</span>
+                    </div>
+                    <div className="flex items-start">
+                    <span className="text-cyan-400 mr-2 mt-0.5 flex-shrink-0">•</span>
+                    <span>Traveling</span>
+                    </div>
                 </div>
                 </div>
             </div>
             </CardContent>
-          </Card>
+        </Card>
         </div>
       </div>
     </div>

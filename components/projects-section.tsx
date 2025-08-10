@@ -36,7 +36,7 @@ const projectsData = [
     description: "Website for the company Oxylife offering solutions for sleep apneas patients and other breathing issues.",
     longDescription:
       "Website for the company Oxylife offering solutions for sleep apneas patients and other breathing issues.",
-    image: "/images/projects/oxylife.png",
+    image: "/images/projects/oxylife.PNG",
     technologies: ["React", "TypeScript", "Vite", "Formspree", "OVH", "Shadcn"],
     features: [
       "Contact form and email handling",
@@ -123,7 +123,7 @@ export default function ProjectsSection({ handleBack, isTransitioning }: Project
                 width={400} // mets tes dimensions réelles
                 height={300}
                 className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                priority // précharge
+                unoptimized
                 placeholder="blur"
                 blurDataURL="/placeholder.svg"
                 />
