@@ -326,15 +326,15 @@ export default function Persona3MenuPortfolio() {
                   {selectedOption.id === "skills" && (
                     <div className="space-y-3 text-base text-gray-300 animate-slide-up">
                       <div className="flex items-center space-x-2">
-                        <div className="w-2 h-2 bg-indigo-400 rounded-full animate-pulse" />
+                        <div className="hidden sm:block w-2 h-2 bg-indigo-400 rounded-full animate-pulse" />
                         <span>Automation, Docker, Python, Homelabbing, Botting</span>
                       </div>
                       <div className="flex items-center space-x-2">
-                        <div className="w-2 h-2 bg-red-400 rounded-full animate-pulse" />
+                        <div className="hidden sm:block w-2 h-2 bg-red-400 rounded-full animate-pulse" />
                         <span>Backend: Node.js, PostgreSQL, Django</span>
                       </div>
                       <div className="flex items-center space-x-2">
-                        <div className="w-2 h-2 bg-orange-400 rounded-full animate-pulse" />
+                        <div className="hidden sm:block w-2 h-2 bg-orange-400 rounded-full animate-pulse" />
                         <span>Frontend: React, Vite</span>
                       </div>
                     </div>
@@ -343,11 +343,11 @@ export default function Persona3MenuPortfolio() {
                   {selectedOption.id === "experience" && (
                     <div className="space-y-3 text-base text-gray-300 animate-slide-up">
                       <div className="flex items-center space-x-2">
-                        <div className="w-2 h-2 bg-teal-400 rounded-full animate-pulse" />
+                        <div className="hidden sm:block w-2 h-2 bg-teal-400 rounded-full animate-pulse" />
                         <span>Software Engineer @ Oxylife</span>
                       </div>
                       <div className="flex items-center space-x-2">
-                        <div className="w-2 h-2 bg-sky-400 rounded-full animate-pulse" />
+                        <div className="hidden sm:block w-2 h-2 bg-sky-400 rounded-full animate-pulse" />
                         <span>Customer Care and Logistic @ &apos;private&apos;</span>
                       </div>
                     </div>
@@ -356,19 +356,19 @@ export default function Persona3MenuPortfolio() {
                   {selectedOption.id === "contact" && (
                     <div className="space-y-3 text-base text-gray-300 animate-slide-up">
                       <div className="flex items-center space-x-2">
-                        <div className="w-2 h-2 bg-pink-400 rpulseounded-full animate-" />
-                        <span>bernede.maximilien@gmail.com</span>
+                        <div className="hidden sm:block w-2 h-2 bg-pink-400 rounded-full animate-pulse" />
+                        <span className="text-sm sm:text-base">bernede.maximilien@gmail.com</span>
                       </div>
                       <div className="flex items-center space-x-2">
-                        <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse" />
+                        <div className="hidden sm:block w-2 h-2 bg-blue-400 rounded-full animate-pulse" />
                         <span>+33 6 81 71 83 89</span>
                       </div>
                       <div className="flex items-center space-x-2">
-                        <div className="w-2 h-2 bg-violet-400 rounded-full animate-pulse" />
+                        <div className="hidden sm:block w-2 h-2 bg-violet-400 rounded-full animate-pulse" />
                         <span>LinkedIn, GitHub, Portfolio</span>
                       </div>
                       <div className="flex items-center space-x-2">
-                        <div className="w-2 h-2 bg-rose-400 rounded-full animate-pulse" />
+                        <div className="hidden sm:block w-2 h-2 bg-rose-400 rounded-full animate-pulse" />
                         <span>Amsterdam, Netherlands</span>
                       </div>
                     </div>
