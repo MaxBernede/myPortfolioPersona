@@ -60,7 +60,7 @@ export default function SkillsSection({ handleBack, isTransitioning }: SkillsSec
               Main interests
             </h3>
             <div className="space-y-4">
-              {skillsData.tools.map((skill, index) => (
+              {skillsData.tools.map((skill) => (
                 <div key={skill.name} className="space-y-2">
                   <div className="flex justify-between items-center">
                     <span className="text-sm font-medium text-gray-300">{skill.name}</span>
@@ -84,7 +84,7 @@ export default function SkillsSection({ handleBack, isTransitioning }: SkillsSec
               Backend
             </h3>
             <div className="space-y-4">
-              {skillsData.backend.map((skill, index) => (
+              {skillsData.backend.map((skill) => (
                 <div key={skill.name} className="space-y-2">
                   <div className="flex justify-between items-center">
                     <span className="text-sm font-medium text-gray-300">{skill.name}</span>
@@ -108,7 +108,7 @@ export default function SkillsSection({ handleBack, isTransitioning }: SkillsSec
               Frontend
             </h3>
             <div className="space-y-4">
-              {skillsData.frontend.map((skill, index) => (
+              {skillsData.frontend.map((skill) => (
                 <div key={skill.name} className="space-y-2">
                   <div className="flex justify-between items-center">
                     <span className="text-sm font-medium text-gray-300">{skill.name}</span>

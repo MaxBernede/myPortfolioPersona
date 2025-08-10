@@ -3,6 +3,7 @@
 import { Card, CardContent } from "@/components/ui/card"
 import TypewriterText from "./typewriter-text"
 import { MapPin, Calendar } from "lucide-react"
+import Image from 'next/image'
 
 interface ProfileSectionProps {
   handleBack: () => void
@@ -35,7 +36,13 @@ export default function ProfileSection({ handleBack, isTransitioning }: ProfileS
         <Card className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border-cyan-500/30 backdrop-blur-sm p-6">
           <CardContent className="text-center">
             <div className="w-32 h-32 mx-auto mb-6 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-full flex items-center justify-center overflow-hidden">
-                <img src="/images/moi.jpg" alt="MyPicture" className="w-full h-full object-cover" />
+                <Image 
+                src="/images/moi.jpg" 
+                alt="MyPicture" 
+                layout="fill" 
+                objectFit="cover" 
+                className="w-full h-full" 
+                />
             </div>
             <h2 className="text-2xl font-bold mb-2 text-cyan-300">Maximilien Bernede</h2>
             <p className="text-gray-400 mb-4">Software Engineer</p>

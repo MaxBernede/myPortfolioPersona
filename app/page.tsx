@@ -148,7 +148,7 @@ export default function Persona3MenuPortfolio() {
 
     window.addEventListener("keydown", handleKeyPress)
     return () => window.removeEventListener("keydown", handleKeyPress)
-  }, [currentMenu, selectedIndex, isTransitioning])
+  }, [currentMenu, selectedIndex, isTransitioning, handleBack, handleSelect])
 
   useEffect(() => {
     const timer = setTimeout(() => setShowDetails(true), 1000)
