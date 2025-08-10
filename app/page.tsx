@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react"
 import { Card } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
 import TypewriterText from "@/components/typewriter-text"
 import ProfileSection from "@/components/profile-section"
 import SkillsSection from "@/components/skills-section"
@@ -10,74 +9,11 @@ import ExperienceSection from "@/components/experience-section"
 import ProjectsSection from "@/components/projects-section"
 import ContactSection from "@/components/contact-section"
 import AboutSection from "@/components/about-section"
-
-interface MenuOption {
-  id: string
-  label: string
-  arcana: string
-  arcanaNumber: string
-  description: string
-  available: boolean
-}
-
-const mainMenuOptions: MenuOption[] = [
-  {
-    id: "profile",
-    label: "PROFILE",
-    arcana: "The Magician",
-    arcanaNumber: "I",
-    description: "Personal information",
-    available: true,
-  },
-  {
-    id: "projects",
-    label: "PROJECTS",
-    arcana: "The High Priestess",
-    arcanaNumber: "II",
-    description: "Achievements and creations",
-    available: true,
-  },
-  {
-    id: "skills",
-    label: "SKILLS",
-    arcana: "The Empress",
-    arcanaNumber: "III",
-    description: "Technical skills",
-    available: true,
-  },
-  {
-    id: "experience",
-    label: "EXPERIENCE",
-    arcana: "The Emperor",
-    arcanaNumber: "IV",
-    description: "Professional background",
-    available: true,
-  },
-  {
-    id: "contact",
-    label: "CONTACT",
-    arcana: "The Star",
-    arcanaNumber: "XVII",
-    description: "Means of communication",
-    available: true,
-  },
-  {
-    id: "about",
-    label: "ABOUT",
-    arcana: "The World",
-    arcanaNumber: "XXI",
-    description: "About this portfolio",
-    available: true,
-  },
-]
-
-const projectsPreviewData = [
-  // Simplified data for main menu preview
-  { category: "Application Web", length: 4, type: "modernes" },
-  { category: "Data Visualization", length: 3, type: "interactifs" },
-  { category: "Productivité", length: 2, type: "collaboratives" },
-  { category: "Créatif", length: 1, type: "immersives" },
-]
+import ParticleField from "@/components/anim/ParticleField"
+import HexagonalGrid from "@/components/anim/HexagonalGrid"
+import CircularTransition from "@/components/anim/CircularTransition"
+import GeometricWipe from "@/components/anim/GeometricWipe"
+import { mainMenuOptions } from "@/components/ui/MenuOptions"
 
 export default function Persona3MenuPortfolio() {
   const [selectedIndex, setSelectedIndex] = useState(0)
@@ -90,7 +26,7 @@ export default function Persona3MenuPortfolio() {
   const selectedOption = mainMenuOptions[selectedIndex]
 
   const handleSelect = () => {
-    if (isTransitioning || !selectedOption.available) return // bloque double clic
+    if (isTransitioning || !selectedOption.available) return
 
     const type = Math.random() > 0.5 ? "circular" : "wipe"
     setTransitionType(type)
@@ -102,12 +38,12 @@ export default function Persona3MenuPortfolio() {
         setCurrentMenu(selectedOption.id)
         setShowGeometricWipe(false)
         setIsTransitioning(false)
-      }, 600) // durée réelle de wipe
+      }, 600)
     }
   }
 
   const handleBack = () => {
-    if (isTransitioning) return // bloque double clic
+    if (isTransitioning) return
 
     setTransitionType("wipe")
     setShowGeometricWipe(true)
@@ -117,7 +53,7 @@ export default function Persona3MenuPortfolio() {
       setCurrentMenu("main")
       setShowGeometricWipe(false)
       setIsTransitioning(false)
-    }, 600) // durée réelle de wipe
+    }, 600)
   }
 
   const handleCircularTransitionComplete = () => {
@@ -128,16 +64,12 @@ export default function Persona3MenuPortfolio() {
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
       if (currentMenu === "main" && !isTransitioning) {
-        switch (e.key) {
-          case "ArrowUp":
-            setSelectedIndex((prev) => (prev > 0 ? prev - 1 : mainMenuOptions.length - 1))
-            break
-          case "ArrowDown":
-            setSelectedIndex((prev) => (prev < mainMenuOptions.length - 1 ? prev + 1 : 0))
-            break
-          case "Enter":
-            handleSelect()
-            break
+        if (e.key === "ArrowUp") {
+          setSelectedIndex((prev) => (prev > 0 ? prev - 1 : mainMenuOptions.length - 1))
+        } else if (e.key === "ArrowDown") {
+          setSelectedIndex((prev) => (prev < mainMenuOptions.length - 1 ? prev + 1 : 0))
+        } else if (e.key === "Enter") {
+          handleSelect()
         }
       } else if (currentMenu !== "main" && !isTransitioning) {
         if (e.key === "Escape") {
@@ -155,126 +87,6 @@ export default function Persona3MenuPortfolio() {
     return () => clearTimeout(timer)
   }, [selectedIndex])
 
-  // ParticleField and HexagonalGrid components (moved from page.tsx)
-  const ParticleField = () => {
-    const [particles, setParticles] = useState<
-      Array<{
-        id: number
-        left: string
-        top: string
-        animationDelay: string
-        animationDuration: string
-        color: string
-      }>
-    >([])
-
-    useEffect(() => {
-      // Générer les particules côté client uniquement
-      const newParticles = Array.from({ length: 50 }, (_, i) => ({
-        id: i,
-        left: `${Math.random() * 100}%`,
-        top: `${Math.random() * 100}%`,
-        animationDelay: `${Math.random() * 5}s`,
-        animationDuration: `${3 + Math.random() * 4}s`,
-        color: Math.random() > 0.5 ? "bg-cyan-400" : "bg-blue-400",
-      }))
-      setParticles(newParticles)
-    }, [])
-
-    return (
-      <div className="fixed inset-0 pointer-events-none">
-        {particles.map((particle) => (
-          <div
-            key={particle.id}
-            className="absolute animate-float-particle"
-            style={{
-              left: particle.left,
-              top: particle.top,
-              animationDelay: particle.animationDelay,
-              animationDuration: particle.animationDuration,
-            }}
-          >
-            <div className={`w-1 h-1 rounded-full ${particle.color} animate-pulse opacity-60`} />
-          </div>
-        ))}
-      </div>
-    )
-  }
-
-  const HexagonalGrid = () => {
-    const [mounted, setMounted] = useState(false)
-
-    useEffect(() => {
-      setMounted(true)
-    }, [])
-
-    if (!mounted) {
-      return <div className="fixed inset-0 opacity-5 pointer-events-none" />
-    }
-
-    return (
-      <div className="fixed inset-0 opacity-5 pointer-events-none">
-        <svg width="100%" height="100%" className="animate-slow-rotate">
-          <defs>
-            <pattern id="hexagons" x="0" y="0" width="60" height="52" patternUnits="userSpaceOnUse">
-              <polygon
-                points="30,2 50,15 50,37 30,50 10,37 10,15"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="0.5"
-              />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#hexagons)" className="text-cyan-400" />
-        </svg>
-      </div>
-    )
-  }
-
-  // CircularTransition and GeometricWipe components (moved from page.tsx)
-  const CircularTransition = ({ isActive, onComplete }: { isActive: boolean; onComplete: () => void }) => {
-    useEffect(() => {
-      if (isActive) {
-        const timer = setTimeout(onComplete, 800)
-        return () => clearTimeout(timer)
-      }
-    }, [isActive, onComplete])
-
-    if (!isActive) return null
-
-    return (
-      <div className="fixed inset-0 z-50 pointer-events-none">
-        <div className="absolute inset-0 bg-black">
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-0 h-0 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-full animate-expand-circle" />
-          </div>
-        </div>
-      </div>
-    )
-  }
-
-  const GeometricWipe = ({ isActive, direction = "left" }: { isActive: boolean; direction?: "left" | "right" }) => {
-    if (!isActive) return null
-
-    return (
-      <div className="fixed inset-0 z-40 pointer-events-none overflow-hidden">
-        {[...Array(8)].map((_, i) => (
-          <div
-            key={i}
-            className={`absolute h-full bg-gradient-to-r from-cyan-500 to-blue-600 transform transition-transform duration-700 ease-in-out ${
-              direction === "left" ? "animate-wipe-left" : "animate-wipe-right"
-            }`}
-            style={{
-              width: "15%",
-              left: `${i * 12.5}%`,
-              animationDelay: `${i * 50}ms`,
-              clipPath: "polygon(0 0, 100% 0, 85% 100%, 0% 100%)",
-            }}
-          />
-        ))}
-      </div>
-    )
-  }
 
   return (
     <div className="min-h-screen bg-black text-white relative">
@@ -326,9 +138,9 @@ export default function Persona3MenuPortfolio() {
             }`}
           >
             {/* Left Panel - Menu */}
-            <div className="w-1/2 p-8 flex flex-col justify-center">
+            <div className="w-1/2 p-1 sm:p-8 flex flex-col justify-center">
               <div className="mb-8 transform transition-all duration-1000 ease-out">
-                <h1 className="text-5xl font-bold mb-2 text-cyan-300 persona-text-glow animate-pulse-glow">
+                <h1 className="text-5xl font-bold mb-2 text-cyan-300 persona-text-glow">
                   <TypewriterText text="MaxB Portfolio" delay={100} />
                 </h1>
                 <div className="text-lg text-gray-400">
@@ -366,7 +178,7 @@ export default function Persona3MenuPortfolio() {
 
                       {/* Arcana Symbol with Rotation */}
                       <div
-                        className={`w-14 h-14 rounded-full border-2 flex items-center justify-center text-sm font-bold transition-all duration-500 relative z-10 ${
+                        className={`"w-10 h-10 aspect-square rounded-full border-2 sm:w-14 sm:h-14 border-2 flex items-center justify-center text-sm font-bold transition-all duration-500 relative z-10 ${
                           selectedIndex === index
                             ? "border-cyan-400 bg-gradient-to-br from-cyan-400/30 to-blue-500/30 text-cyan-300 animate-spin-slow"
                             : "border-gray-600 text-gray-400 group-hover:border-cyan-500/50"
@@ -423,7 +235,7 @@ export default function Persona3MenuPortfolio() {
                 ))}
               </div>
 
-              <div className="mt-8 text-sm text-gray-500 animate-fade-in">
+              <div className="mt-8 text-sm text-gray-500 animate-fade-in hidden sm:block">
                 <div className="flex items-center space-x-4">
                   <span>↑↓ Navigate</span>
                   <span>•</span>
@@ -438,13 +250,13 @@ export default function Persona3MenuPortfolio() {
                 {/* Arcana Card with 3D Rotation */}
                 <Card className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border-cyan-500/30 backdrop-blur-sm p-6 transform transition-all duration-700 hover:rotate-y-12 preserve-3d">
                   <div className="text-center relative">
-                    <div className="w-28 h-28 mx-auto mb-4 rounded-full border-4 border-cyan-400 bg-gradient-to-br from-cyan-400/20 to-blue-500/20 flex items-center justify-center relative animate-float">
+                    <div className="w-20 h-20 sm:w-28 sm:h-28 mx-auto mb-4 rounded-full border-4 border-cyan-400 bg-gradient-to-br from-cyan-400/20 to-blue-500/20 flex items-center justify-center relative animate-float">
                       <span className="text-3xl font-bold text-cyan-300 z-10">{selectedOption.arcanaNumber}</span>
                       <div className="absolute inset-0 rounded-full bg-gradient-to-br from-cyan-400/10 to-blue-500/10 animate-spin-slow" />
                       <div className="absolute inset-0 rounded-full border-2 border-cyan-400/30 animate-ping" />
                     </div>
-                    <h3 className="text-2xl font-bold text-cyan-300 mb-2 persona-text-glow">{selectedOption.arcana}</h3>
-                    <div className="text-gray-400">{selectedOption.description}</div>
+                    <h3 className="text-2xl font-bold text-cyan-300 mb-2 persona-text-glow text-center">{selectedOption.arcana}</h3>
+                    <div className="text-gray-400 text-center">{selectedOption.description}</div>
                   </div>
                 </Card>
 
@@ -465,7 +277,7 @@ export default function Persona3MenuPortfolio() {
                   </div> */}
 
                   {showDetails && selectedOption.available && (
-                    <div className="text-cyan-300 animate-pulse p-4 rounded-lg bg-gradient-to-r from-cyan-500/10 to-blue-500/10 border border-cyan-500/20">
+                    <div className="text-cyan-300 animate-pulse p-4 rounded-lg bg-gradient-to-r from-cyan-500/10 to-blue-500/10 border border-cyan-500/20 hidden sm:block">
                       <TypewriterText text="► Press ENTER to continue..." delay={80} />
                     </div>
                   )}
@@ -498,7 +310,7 @@ export default function Persona3MenuPortfolio() {
                     <div className="space-y-3 text-base text-gray-300 animate-slide-up">
                       <div className="flex items-center space-x-2">
                         <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-                        <span>{projectsPreviewData.length} projects realized</span>
+                        <span>Many projects realized</span>
                       </div>
                       <div className="flex items-center space-x-2">
                         <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse" />
@@ -536,7 +348,7 @@ export default function Persona3MenuPortfolio() {
                       </div>
                       <div className="flex items-center space-x-2">
                         <div className="w-2 h-2 bg-sky-400 rounded-full animate-pulse" />
-                        <span>Customer Care and Logistic @ Amsterdam</span>
+                        <span>Customer Care and Logistic @ &apos;private&apos;</span>
                       </div>
                     </div>
                   )}
@@ -544,7 +356,7 @@ export default function Persona3MenuPortfolio() {
                   {selectedOption.id === "contact" && (
                     <div className="space-y-3 text-base text-gray-300 animate-slide-up">
                       <div className="flex items-center space-x-2">
-                        <div className="w-2 h-2 bg-pink-400 rounded-full animate-pulse" />
+                        <div className="w-2 h-2 bg-pink-400 rpulseounded-full animate-" />
                         <span>bernede.maximilien@gmail.com</span>
                       </div>
                       <div className="flex items-center space-x-2">
@@ -570,9 +382,7 @@ export default function Persona3MenuPortfolio() {
         {/* Render Section Components based on currentMenu */}
         {currentMenu === "profile" && <ProfileSection handleBack={handleBack} isTransitioning={isTransitioning} />}
         {currentMenu === "skills" && <SkillsSection handleBack={handleBack} isTransitioning={isTransitioning} />}
-        {currentMenu === "experience" && (
-          <ExperienceSection handleBack={handleBack} isTransitioning={isTransitioning} />
-        )}
+        {currentMenu === "experience" && <ExperienceSection handleBack={handleBack} isTransitioning={isTransitioning} />}
         {currentMenu === "projects" && <ProjectsSection handleBack={handleBack} isTransitioning={isTransitioning} />}
         {currentMenu === "contact" && <ContactSection handleBack={handleBack} isTransitioning={isTransitioning} />}
         {currentMenu === "about" && <AboutSection handleBack={handleBack} isTransitioning={isTransitioning} />}

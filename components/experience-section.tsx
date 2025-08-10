@@ -27,7 +27,7 @@ const experienceData = [
   },
   {
     title: "Customer Care and Logistic",
-    company: "Amsterdam",
+    company: "'private'",
     period: "2021 - 2025",
     location: "Amsterdam, Netherlands",
     type: "Long term contract",

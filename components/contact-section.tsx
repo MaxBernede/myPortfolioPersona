@@ -39,18 +39,18 @@ export default function ContactSection({ handleBack, isTransitioning }: ContactS
               Interested about my work ? Feel free to contact me !
             </p>
 
-            <div className="grid md:grid-cols-2 gap-6 mb-8">
-              <div className="space-y-4">
+            <div className="flex flex-col items-center space-y-4 md:grid md:grid-cols-2 md:gap-6 md:space-y-0 mb-8">
+              <div className="flex flex-col items-center space-y-4 w-full">
                 <Button
-                className="w-full bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 h-12"
+                className="w-full max-w-xs mx-auto bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 h-12 text-xs sm:text-sm"
                 onClick={() => window.location.href = "mailto:bernede.maximilien@gmail.com"}
                 >
-                <Mail className="w-5 h-5 mr-3" />
-                bernede.maximilien@gmail.com
+                <Mail className="w-4 h-4 mr-2 flex-shrink-0" />
+                <span className="truncate">bernede.maximilien@gmail.com</span>
                 </Button>
                 <Button
                 variant="outline"
-                className="w-full border-cyan-500/30 text-cyan-300 hover:bg-cyan-500/10 bg-transparent h-12"
+                className="w-full max-w-xs border-cyan-500/30 text-cyan-300 hover:bg-cyan-500/10 bg-transparent h-12"
                 onClick={() => window.location.href = "tel:+33681718389"}
                 >
                 <Phone className="w-5 h-5 mr-3" />
@@ -58,10 +58,10 @@ export default function ContactSection({ handleBack, isTransitioning }: ContactS
                 </Button>
               </div>
 
-              <div className="space-y-4">
+              <div className="flex flex-col items-center space-y-4 w-full">
                 <Button
                 variant="outline"
-                className="w-full border-cyan-500/30 text-cyan-300 hover:bg-cyan-500/10 bg-transparent h-12"
+                className="w-full max-w-xs border-cyan-500/30 text-cyan-300 hover:bg-cyan-500/10 bg-transparent h-12"
                 onClick={() => window.open("https://www.linkedin.com/in/maxbernede", "_blank")}
                 >
                 <Linkedin className="w-5 h-5 mr-3" />
@@ -69,7 +69,7 @@ export default function ContactSection({ handleBack, isTransitioning }: ContactS
                 </Button>
                 <Button
                 variant="outline"
-                className="w-full border-cyan-500/30 text-cyan-300 hover:bg-cyan-500/10 bg-transparent h-12"
+                className="w-full max-w-xs border-cyan-500/30 text-cyan-300 hover:bg-cyan-500/10 bg-transparent h-12"
                 onClick={() => window.open("https://github.com/maxbernede", "_blank")}
                 >
                 <Github className="w-5 h-5 mr-3" />
