@@ -63,6 +63,7 @@ export default function Persona3MenuPortfolio() {
   setTransitionType(type)
   setIsTransitioning(true)
 
+  preloadPageContent(selectedOption.id)
   // AJOUT: Ajouter à l'historique du navigateur
   window.history.pushState({ menu: selectedOption.id }, '', `#${selectedOption.id}`)
 
@@ -76,6 +77,27 @@ export default function Persona3MenuPortfolio() {
   }
   }, [isTransitioning, selectedOption])
 
+  const preloadPageContent = (menuId: string) => {
+  // Précharger les images
+  if (menuId === "profile") {
+    const images = ["/images/moi.jpg"]
+    images.forEach(src => {
+      const img = new Image()
+      img.src = src
+    })
+  }
+  
+  // Précharger d'autres ressources si nécessaire
+  if (menuId === "projects") {
+    const basePath = "/images/projects/"
+    const imageNames = ["home_server.jpg", "oxylife.PNG", "transcendence.png", "webserver.jpg"]
+    
+    imageNames.forEach(name => {
+      const img = new Image()
+      img.src = basePath + name
+    })
+  }
+  }
 
   const handleCircularTransitionComplete = useCallback(() => {
     setCurrentMenu(selectedOption.id)
